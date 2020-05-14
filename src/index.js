@@ -1,4 +1,6 @@
 import React from 'react';
+import './config/ReactotronConfig';
+
 import { StatusBar, View } from 'react-native';
 
 import Routes from './routes';
