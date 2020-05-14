@@ -1,31 +1,60 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Container,
-  MovieTitle,
-  MovieReleaseYear,
+  ContentContainer,
+  ContentInfoRow,
+  Cover,
+  CoverContainer,
   MovieCategories,
-  MovieClassificationAndTime,
+  MovieColumnInfo,
+  MovieReleaseYear,
   MovieScore,
-  Row,
-  Column,
+  MovieTitle,
+  TitleRow,
 } from './styles';
 
-const MovieCard = () => (
-  <Container>
-    <Row>
-      <MovieTitle>Ad Astra</MovieTitle>
-      <MovieReleaseYear>(2019)</MovieReleaseYear>
-    </Row>
+const formatReleaseDateToYear = releaseDate =>
+  new Date(releaseDate).getFullYear().toString() || '0000';
 
-    <Row>
-      <MovieScore>78%</MovieScore>
-      <Column>
-        <MovieClassificationAndTime>PG-13 - 2h 3m</MovieClassificationAndTime>
-        <MovieCategories>Science, Fiction, Action</MovieCategories>
-      </Column>
-    </Row>
-  </Container>
-);
+const MovieCard = ({ movie }) => {
+  const { title, poster_path, release_date, vote_average } = movie;
+  return (
+    <Container>
+      <CoverContainer>
+        <Cover
+          source={{
+            uri: `https://image.tmdb.org/t/p/original${poster_path}`,
+          }}
+          resizeMode="cover"
+        />
+      </CoverContainer>
+      <ContentContainer>
+        <TitleRow>
+          <MovieTitle>{title}</MovieTitle>
+          <MovieReleaseYear>
+            ({formatReleaseDateToYear(release_date)})
+          </MovieReleaseYear>
+        </TitleRow>
+
+        <ContentInfoRow>
+          <MovieScore>{vote_average * 10}%</MovieScore>
+          <MovieColumnInfo>
+            <MovieCategories>Science, Fiction, Action</MovieCategories>
+          </MovieColumnInfo>
+        </ContentInfoRow>
+      </ContentContainer>
+    </Container>
+  );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string,
+    poster_path: PropTypes.string,
+    vote_average: PropTypes.number,
+  }).isRequired,
+};
 
 export default MovieCard;
