@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-const api = axios.create({
+const axiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
 });
 
-export default api;
+export default function api(method, url, data = {}, options = {}) {
+  const httpMethod = method.toLowerCase();
+
+  const hasData = ['post', 'put', 'patch'].indexOf(httpMethod) >= 0;
+  const settings = hasData ? options : data;
+
+  return hasData
+    ? axiosInstance[httpMethod](url, data, settings)
+    : axiosInstance[httpMethod](url, settings);
+}

@@ -3,19 +3,26 @@ import Immutable from 'seamless-immutable';
 
 export const INITIAL_STATE = Immutable({
   data: [],
+  page: 1,
+  totalPages: 10,
   loading: false,
 });
 
 const { Types, Creators } = createActions({
-  addMovieRequest: ['categories'],
-  addMovieSuccess: ['movies'],
+  fetchMoviesRequest: ['filters'],
+  fetchMoviesSuccess: ['movies'],
+  searchMoviesSuccess: ['movies'],
+  searchMoviesRequest: ['filters'],
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.ADD_MOVIE_REQUEST]: state => state.merge({ loading: true }),
-  [Types.ADD_MOVIE_SUCCESS]: (state, { movies }) =>
+  [Types.SEARCH_MOVIES_REQUEST]: state => state.merge({ loading: true }),
+  [Types.SEARCH_MOVIES_SUCCESS]: (state, { movies }) =>
     state.update('data', data => [...data, movies]),
+  [Types.FETCH_MOVIES_REQUEST]: state => state.merge({ loading: true }),
+  [Types.FETCH_MOVIES_SUCCESS]: (state, { movies }) =>
+    state.update('data', data => [...data, ...movies]),
 });
 
-export const RepositoriesTypes = Types;
+export const MoviesTypes = Types;
 export default Creators;

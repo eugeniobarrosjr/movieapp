@@ -19,7 +19,8 @@ const formatReleaseDateToYear = releaseDate =>
   new Date(releaseDate).getFullYear().toString() || '0000';
 
 const MovieCard = ({ movie }) => {
-  const { title, poster_path, release_date, vote_average } = movie;
+  const { title, release_date, poster_path, vote_average } = movie;
+
   return (
     <Container>
       <CoverContainer>
