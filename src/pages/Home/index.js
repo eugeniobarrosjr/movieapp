@@ -24,8 +24,7 @@ class Home extends Component {
   }
 
   render() {
-    const { movies, genres } = this.props;
-    console.tron.log(genres);
+    const { movies, genres, navigation } = this.props;
     return (
       <Container>
         <TitleContainer>
@@ -40,7 +39,9 @@ class Home extends Component {
         <MovieList
           data={movies.data}
           keyExtractor={item => `${item.id + Math.random()}`}
-          renderItem={({ item }) => <MovieCard movie={item} />}
+          renderItem={({ item }) => (
+            <MovieCard movie={item} navigation={navigation} />
+          )}
         />
       </Container>
     );
