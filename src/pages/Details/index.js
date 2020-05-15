@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 
 import {
   Banner,
+  Chip,
+  ChipTitle,
   Container,
+  Content,
+  GenresContainer,
   Plot,
   PlotTitle,
   ReleaseDate,
   Title,
-  Content,
-  Chip,
-  ChipTitle,
-  GenresContainer,
 } from './styles';
 
 const getGenresNames = (genreIds, genres) => {

@@ -16,7 +16,7 @@ const { Types, Creators } = createActions({
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEARCH_MOVIES_REQUEST]: state => state.merge({ loading: true }),
   [Types.SEARCH_MOVIES_SUCCESS]: (state, { movies }) =>
-    state.update('data', data => [...data, ...movies]),
+    state.update('data', () => [...movies]),
 });
 
 export const MoviesTypes = Types;

@@ -9,18 +9,17 @@ export const MovieList = styled.FlatList`
 `;
 
 export const TitleContainer = styled.View`
-  width: 100%;
+  margin: 10px 0;
   padding-left: 17px;
-  margin: 10px 0 0;
+  width: 100%;
 `;
 
-export const GenrerTitle = styled.Text`
+export const Title = styled.Text`
   color: #666666;
   font-size: 14px;
   font-weight: 700;
 `;
 
 export const GenrerList = styled.FlatList`
-  margin: 15px;
   width: 100%;
 `;
