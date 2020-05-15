@@ -19,14 +19,14 @@ const formatReleaseDateToYear = releaseDate =>
   new Date(releaseDate).getFullYear().toString() || '0000';
 
 const MovieCard = ({ movie }) => {
-  const { title, release_date, poster_path, vote_average } = movie;
+  const { title, releaseDate, posterPath, voteAverage } = movie;
 
   return (
     <Container>
       <CoverContainer>
         <Cover
           source={{
-            uri: `https://image.tmdb.org/t/p/original${poster_path}`,
+            uri: `https://image.tmdb.org/t/p/original${posterPath}`,
           }}
           resizeMode="cover"
         />
@@ -35,12 +35,12 @@ const MovieCard = ({ movie }) => {
         <TitleRow>
           <MovieTitle>{title}</MovieTitle>
           <MovieReleaseYear>
-            ({formatReleaseDateToYear(release_date)})
+            ({formatReleaseDateToYear(releaseDate)})
           </MovieReleaseYear>
         </TitleRow>
 
         <ContentInfoRow>
-          <MovieScore>{vote_average * 10}%</MovieScore>
+          <MovieScore>{voteAverage * 10}%</MovieScore>
           <MovieColumnInfo>
             <MovieCategories>Science, Fiction, Action</MovieCategories>
           </MovieColumnInfo>
@@ -53,8 +53,8 @@ const MovieCard = ({ movie }) => {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string,
-    poster_path: PropTypes.string,
-    vote_average: PropTypes.number,
+    posterPath: PropTypes.string,
+    voteAverage: PropTypes.number,
   }).isRequired,
 };
 

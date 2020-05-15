@@ -9,8 +9,6 @@ export const INITIAL_STATE = Immutable({
 });
 
 const { Types, Creators } = createActions({
-  fetchMoviesRequest: ['filters'],
-  fetchMoviesSuccess: ['movies'],
   searchMoviesSuccess: ['movies'],
   searchMoviesRequest: ['filters'],
 });
@@ -18,9 +16,6 @@ const { Types, Creators } = createActions({
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEARCH_MOVIES_REQUEST]: state => state.merge({ loading: true }),
   [Types.SEARCH_MOVIES_SUCCESS]: (state, { movies }) =>
-    state.update('data', data => [...data, movies]),
-  [Types.FETCH_MOVIES_REQUEST]: state => state.merge({ loading: true }),
-  [Types.FETCH_MOVIES_SUCCESS]: (state, { movies }) =>
     state.update('data', data => [...data, ...movies]),
 });
 

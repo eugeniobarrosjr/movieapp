@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,19 +10,9 @@ import MovieCard from '../../components/MovieCard';
 
 class Home extends Component {
   componentDidMount() {
-    const { fetchMoviesRequest } = this.props;
-    fetchMoviesRequest({ page: 1 });
+    const { searchMoviesRequest } = this.props;
+    searchMoviesRequest({ url: '/movie/popular', page: 1 });
   }
-
-  renderFooter = ({ loading }) => {
-    if (loading) return null;
-
-    return (
-      <View>
-        <ActivityIndicator />
-      </View>
-    );
-  };
 
   renderItem = ({ item }) => {
     return <MovieCard movie={item} />;
@@ -37,8 +26,6 @@ class Home extends Component {
           renderItem={this.renderItem}
           data={movies.data}
           keyExtractor={item => `${item.id + Math.random()}`}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={this.renderFooter}
         />
       </Container>
     );
