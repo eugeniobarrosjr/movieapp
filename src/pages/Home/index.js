@@ -5,9 +5,16 @@ import { connect } from 'react-redux';
 import MoviesActions from '../../store/ducks/movies';
 import GenresActions from '../../store/ducks/genres';
 
-import { Container, MovieList } from './styles';
+import {
+  Container,
+  MovieList,
+  GenrerList,
+  GenrerTitle,
+  TitleContainer,
+} from './styles';
 
 import MovieCard from '../../components/MovieCard';
+import GenreChip from '../../components/GenrerChip';
 
 class Home extends Component {
   componentDidMount() {
@@ -16,18 +23,24 @@ class Home extends Component {
     searchMoviesRequest({ url: '/movie/popular', page: 1 });
   }
 
-  renderItem = ({ item }) => {
-    return <MovieCard movie={item} />;
-  };
-
   render() {
-    const { movies } = this.props;
+    const { movies, genres } = this.props;
+    console.tron.log(genres);
     return (
       <Container>
+        <TitleContainer>
+          <GenrerTitle>Genres</GenrerTitle>
+        </TitleContainer>
+        <GenrerList
+          data={genres.data}
+          horizontal
+          keyExtractor={item => `${item.id}`}
+          renderItem={({ item }) => <GenreChip genre={item} />}
+        />
         <MovieList
-          renderItem={this.renderItem}
           data={movies.data}
           keyExtractor={item => `${item.id + Math.random()}`}
+          renderItem={({ item }) => <MovieCard movie={item} />}
         />
       </Container>
     );

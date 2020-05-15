@@ -7,14 +7,14 @@ export const INITIAL_STATE = Immutable({
 });
 
 const { Types, Creators } = createActions({
-  addGenresSuccess: ['movies'],
+  addGenresSuccess: ['genres'],
   addGenresRequest: [],
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_GENRES_REQUEST]: state => state.merge({ loading: true }),
   [Types.ADD_GENRES_SUCCESS]: (state, { genres }) =>
-    state.update('data', data => [...data, ...genres]),
+    state.update('data', () => [...genres]),
 });
 
 export const GenresTypes = Types;
