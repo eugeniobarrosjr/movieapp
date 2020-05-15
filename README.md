@@ -24,7 +24,6 @@ cd movieapp
 
 ```
 Create .env file based on the example with themoviedb api key.
-
 ```
 
 Then install dependencies and run:
